@@ -4,8 +4,8 @@
 
 ---
 
-Cyclically writes data to Disk to prevent the dis from sleeping.
+Cyclically writes data to Disk to prevent the disk from sleeping.
 
 For non-Chinese users:
 * Input drive letter then Enter
-* Press Enter to quit
+* Press Enter and wait to quit
