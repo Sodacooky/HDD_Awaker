@@ -95,7 +95,7 @@ int main()
 	g_bRunning = true;
 	thread thr(&CycleWriteThread, ref(file));
 
-	cout << "按任意键停止..." << endl;
+	cout << "按下回车停止..." << endl;
 	cin.get();
 	cout << "正在停止..." << endl;
 	g_bRunning = false;
