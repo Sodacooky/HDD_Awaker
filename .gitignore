@@ -39,3 +39,9 @@
 Debug/
 Release/
 .vs/
+
+# Document
+doc/
+
+# Third Part Libraries Directories
+lib/
