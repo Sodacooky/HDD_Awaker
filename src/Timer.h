@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <atomic>
 #include <functional>
@@ -6,22 +6,22 @@
 #include <thread>
 
 /*
-        ¶¨Ê±Æ÷
+        å®šæ—¶è§¦å‘å™¨
         callback trigger
 */
 class Timer {
 public:
   Timer(std::function<void(void)> callback);
 
-  //ÉèÖÃ´¥·¢ÖÜÆÚ£¬ÉèÖÃ»áÔÚµ±Ç°´ÎµÈ´ı½áÊøºóÉúĞ§
-  //ÒªÇóÊÇ1-16s£¬²»ÔÚ·¶Î§ÄÚ²»»á²úÉú¸Ä±ä
-  //Ä¬ÈÏÊÇ4s
+  //è®¾ç½®è§¦å‘å‘¨æœŸï¼Œè®¾ç½®ä¼šåœ¨å½“å‰æ¬¡ç­‰å¾…ç»“æŸåç”Ÿæ•ˆ
+  //è¦æ±‚æ˜¯1-16sï¼Œä¸åœ¨èŒƒå›´å†…ä¸ä¼šäº§ç”Ÿæ”¹å˜
+  //é»˜è®¤æ˜¯4s
   void SetPeriod(unsigned int seconds);
 
-  //¿ªÊ¼ÔËĞĞ
+  //å¼€å§‹è¿è¡Œ
   void Run();
 
-  //µÈ´ıÒ»´ÎÑ­»·È»ºóÍË³öÑ­»·
+  //ç­‰å¾…ä¸€æ¬¡å¾ªç¯ç„¶åé€€å‡ºå¾ªç¯
   void Quit();
 
 private:
@@ -30,6 +30,6 @@ private:
 private:
   std::function<void(void)> m_funcCallback;
   std::thread *m_pthread;
-  std::atomic<bool> m_bContinue;
-  std::atomic<unsigned int> m_unSecondSleep;
+  std::atomic<bool> m_atm_bContinue;
+  std::atomic<unsigned int> m_atm_unSecondSleep;
 };

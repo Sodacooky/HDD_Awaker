@@ -1,10 +1,11 @@
-#include "FileManager.h"
+﻿#include "FileManager.h"
 
 FileManager::FileManager(const std::string &file_path) {
   lBytesWritten = 0;
   m_strFilePath = file_path;
   m_tpStartTime = std::chrono::system_clock::now();
   m_randEngine.seed(std::chrono::system_clock::to_time_t(m_tpStartTime));
+  //仍然不知道文件是否是存在的
 }
 
 bool FileManager::WriteLine() {
@@ -46,8 +47,31 @@ bool FileManager::Delete() {
   return false;
 }
 
+bool FileManager::IsPartitionExist(const std::string &part_char) {
+  if (part_char.size() != 1) {
+    return false;
+  }
+
+  if (part_char[0] < 'A' || part_char[0] > 'z') {
+    return false;
+  }
+
+  std::string path = part_char + ":/*";
+
+  bool ret = false;
+  _finddata_t find_data;
+  auto find_handle = _findfirst(path.c_str(), &find_data);
+  if (find_handle != -1) {
+    ret = true;
+  } else {
+    ret = false;
+  }
+  _findclose(find_handle);
+  return ret;
+}
+
 bool FileManager::__TestIfFileExist() {
-  // new ifstream object
+  // 不用成员变量来操作
   std::ifstream file(m_strFilePath);
   if (file.is_open()) {
     file.close();
