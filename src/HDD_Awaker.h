@@ -1,39 +1,38 @@
 ﻿#pragma once
 
+#include "ExecutionOption.h"
 #include "FileManager.h"
 #include "Timer.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 // application
-class Awaker {
+class Awaker
+{
 public:
-  // in main
-  int Main();
+	// in main
+	int Main(int argc, char* argv[]);
 
 private:
-  //
-  void __PrintState();
+	//打印状态的线程
+	void __PrintStateThreadFunc();
 
-  //
-  void __ProcessCmd();
+	//将C语言main函数命令行转为string块
+	std::vector<std::string> __CmdlineParse(int argc, char* argv[]);
 
-  //
-  void __CmdHelp();
-  //
-  void __CmdPeriod(unsigned int seconds);
-  //
-  void __CmdStop();
-  //
-  void __CmdSet(const std::string &disk);
+	//根据参数填充配置
+	ExecutionOption __CmdblocksParse(const std::vector<std::string>& blocks);
 
 private:
-  //
-  Timer *m_timerUpdateConsole;
-  //
-  Timer *m_timerWriteData;
-  //
-  FileManager *m_filemanager;
-  //
-  bool m_bContinue;
+	// ---> __PrintStateThreadFunc()
+	Timer* m_ptimerUpdateConsole;
+	// ---> m_filemanager.WriteLine()
+	Timer* m_ptimerWriteData;
+	//
+	FileManager* m_pfmFile;
+	//
+	bool m_bContinue;
+	//
+	ExecutionOption m_eoOption;
 };

@@ -6,30 +6,27 @@
 #include <thread>
 
 /*
-        定时触发器
-        callback trigger
+				定时触发器
+				period callback trigger
+				callback: void func(void);
 */
-class Timer {
+class Timer
+{
 public:
-  Timer(std::function<void(void)> callback);
+	Timer(std::function<void(void)> callback, unsigned int period);
 
-  //设置触发周期，设置会在当前次等待结束后生效
-  //要求是1-16s，不在范围内不会产生改变
-  //默认是4s
-  void SetPeriod(unsigned int seconds);
+	//开始运行
+	void Run();
 
-  //开始运行
-  void Run();
-
-  //等待一次循环然后退出循环
-  void Quit();
+	//等待一次循环然后退出循环
+	void Quit();
 
 private:
-  void __ThreadFunc();
+	void __ThreadFunc();
 
 private:
-  std::function<void(void)> m_funcCallback;
-  std::thread *m_pthread;
-  std::atomic<bool> m_atm_bContinue;
-  std::atomic<unsigned int> m_atm_unSecondSleep;
+	std::function<void(void)> m_funcCallback;
+	std::thread* m_pthread;
+	std::atomic<bool> m_atm_bContinue;
+	unsigned int m_unSecondSleep;
 };
