@@ -28,7 +28,7 @@ int Awaker::Main(int argc, char* argv[])
 		cout << "分区不存在！" << endl;
 		exit(-2);
 	}
-	m_pfmFile = new FileManager(std::string(&m_eoOption.chPartition) + ":/HDD_Awaker.txt");
+	m_pfmFile = new FileManager(std::string(":/HDD_Awaker.txt").insert(0, 1, m_eoOption.chPartition));
 
 	//申请线程
 	m_ptimerWriteData = new Timer(bind(&FileManager::WriteRandomLine, m_pfmFile), m_eoOption.unPeriod);
@@ -43,7 +43,6 @@ int Awaker::Main(int argc, char* argv[])
 
 	//等待线程停止
 	cout << "等待线程停止...\n如果你弄了非常长的周期那么建议你kill了吧。" << endl;
-	this_thread::sleep_for(chrono::seconds(1));
 	m_ptimerWriteData->Quit();
 	m_ptimerUpdateConsole->Quit();
 
@@ -121,7 +120,14 @@ Awaker::__CmdblocksParse(const std::vector<std::string>& blocks)
 					eo.bIsRemoveAtQuit = true;
 					break;
 
-				default:
+				default: //未匹配到
+				case 'h': //"-h"
+					cout << "-p [秒] :设定周期为指定秒数，默认为4\n"
+						<< "-d [分区] :设定工作在指定分区，默认为e\n"
+						<< "-r :设定在工作结束后删除文件，默认关闭\n"
+						<< "例子：HDD_Awaker.exe -p 2 -d c -r\n"
+						<< "\t在C分区以2秒为周期写入，在结束后删除文件.\n";
+					throw std::exception(std::string("未定义的命令: " + blocks[index]).c_str());
 					break;
 			}
 		}
