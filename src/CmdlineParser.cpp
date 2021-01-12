@@ -12,7 +12,7 @@ std::map<std::string, std::string> CmdlineParser::DoProcess() {
 
   std::string cmd;
   std::string val;
-  for (int index = 0; index <= m_vec_strCmdblocks.size();
+  for (int index = 0; index < m_vec_strCmdblocks.size();
        /*在循环内部控制 index */) {
     cmd.clear();
     val.clear();
