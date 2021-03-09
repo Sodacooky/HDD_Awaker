@@ -36,8 +36,7 @@ void DiskSelectWindow::__BuildWindow() {
 	//begin pack
 
 	//build sel buttons
-	//__GenerateSelButton(__GetSysExistPartition());
-	__GenerateSelButton("QWERTYUIOPASDFGHJKLZXCVBNM");
+	__GenerateSelButton(__GetSysExistPartition());
 
 	//set widget attr
 	m_pPack->type(Fl_Pack::VERTICAL);

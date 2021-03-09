@@ -5,29 +5,21 @@
 
 #include <chrono>
 #include <fstream>
-#include <random>
 #include <sstream>
 #include <string>
 
 /*
-				负责文件读写
-				用文件目录字符串创建一个对象，然后一直使用这个对象来打开、写入、关闭
+		负责文件读写
+		文件目录字符串创建一个对象，然后一直使用这个对象来打开、写入、关闭
 */
-class FileManager
-{
+class FileManager {
 public:
 	//时间计算从构造开始
-	//传入文件路径以备随时打开
-	FileManager(const std::string& file_path);
+	//传入分区盘符以备随时打开
+	FileManager(char partition);
 
-	//写入 自动生成的时间和随机数
-	void WriteRandomLine();
-
-	//写入 自动生成的时间和指定内容
-	void WriteTextLine(const std::string& content);
-
-	//删除文件
-	bool Delete();
+	//写入 自动生成的时间
+	void Write();
 
 	//测试某个分区是否存在
 	//只需要输入分区字母
@@ -41,19 +33,18 @@ public:
 	long lBytesWritten;
 
 private:
-	bool __TestIfFileExist();
+	bool __IsFileExist();
 	bool __TryOpenFile();
 	bool __TryCloseFile();
-
-	std::string __TimePrefixGenerate();
+	void __ClearFile();
 
 private:
-	//
+	//盘符
+	char m_chPartition;
+	//生成的文件名
 	std::string m_strFilePath;
 	//
-	std::default_random_engine m_randEngine;
-	//
 	std::fstream m_fstrmFile;
-	//
-	std::chrono::system_clock::time_point m_tpStartTime;
 };
+
+class FileManegerException : public std::exception {};

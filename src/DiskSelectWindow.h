@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <conio.h>
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
@@ -15,6 +14,11 @@
 
 #include "FileManager.h"
 
+/*
+		工作分区选择窗口
+		构造函数启动后直到选择了窗口才返回
+		然后访问strSelectedDisk来获取用户选择的分区
+*/
 class DiskSelectWindow {
 public:
 	DiskSelectWindow();
