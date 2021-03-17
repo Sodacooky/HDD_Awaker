@@ -28,12 +28,17 @@ DiskSelectWindow::~DiskSelectWindow() {
 
 void DiskSelectWindow::__BuildWindow() {
 	m_pWindow = new	Fl_Window(240, 240, u8"勾选分区");
-	//begin window
-	m_pButtonStart = new Fl_Button(0, m_pWindow->h() - 32, m_pWindow->w(), 32, u8"运行");
+	m_pWindow->end();
 	m_pScroll = new Fl_Scroll(0, 0, m_pWindow->w(), m_pWindow->h() - 32);
-	//begin scroll
+	m_pScroll->end();
 	m_pPack = new Fl_Pack(0, 0, m_pWindow->w(), 32 * 26);
-	//begin pack
+	m_pPack->end();
+
+	m_pButtonStart = new Fl_Button(0, m_pWindow->h() - 32, m_pWindow->w(), 32, u8"运行");
+	m_pWindow->add(m_pButtonStart);
+
+	m_pWindow->add(m_pScroll);
+	m_pScroll->add(m_pPack);
 
 	//build sel buttons
 	__GenerateSelButton(__GetSysExistPartition());
@@ -63,6 +68,7 @@ void DiskSelectWindow::__GenerateSelButton(const std::string& avaliableDisk) {
 		tmpLabel.push_back(ch);
 		auto btn = new Fl_Check_Button(0, 0, 64, 32);
 		btn->copy_label(tmpLabel.c_str());
+		m_pPack->add(btn);
 		m_vpDiskSelButton.push_back(btn);
 	}
 }

@@ -1,16 +1,12 @@
 ﻿#pragma once
 
 #include <iostream>
-#include <map>
-#include <sstream>
-#include <string>
-#include <vector>
 
-#include "FileManager.h"
 #include "DiskSelectWindow.h"
+#include "WorkingWindow.h"
 
 // application
-class Awaker {
+class Application {
 public:
 	// gui main
 	int Main();

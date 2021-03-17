@@ -2,18 +2,24 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
-	Awaker app;
-	//return app.Main(argc, argv);
+int main(void) {
+	Application app;
 	return app.Main();
 }
 
-int Awaker::Main() {
+int Application::Main() {
+	//get disk selection
 	auto disk_sel_window = new DiskSelectWindow();
-	std::cout << disk_sel_window->strSelectedDisk << std::endl;
+	string diskSelection;
+	diskSelection = disk_sel_window->strSelectedDisk;
 	delete disk_sel_window;
 
-	cin.get();
+	if (diskSelection.empty()) {
+		return 1;
+	}
+
+	//main interface
+	auto main_work_window = new WorkingWindow(diskSelection);
 
 	return 0;
 }
