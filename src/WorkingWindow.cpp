@@ -26,7 +26,7 @@ void WorkingWindow::__ReadLoop() {
 		//sleep直到到点
 		nowTime = std::chrono::system_clock::now();
 		std::chrono::duration<double, std::milli> deltaTime = nowTime - lastWorkTime;
-		if (deltaTime.count() < 8000) {
+		if (deltaTime.count() < 5000) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			continue;
 		}
@@ -35,7 +35,7 @@ void WorkingWindow::__ReadLoop() {
 		}
 		//遍历做
 		for (auto& fm : m_vecFileManager) {
-			fm.TryRead();
+			fm.TryWrite();
 		}
 	}
 }

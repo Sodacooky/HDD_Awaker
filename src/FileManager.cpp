@@ -2,6 +2,15 @@
 
 FileManager::FileManager(char partition) {
 	m_chPartition = partition;
+	__GenerateFilename();
+}
+
+FileManager::~FileManager() {
+	std::fstream file(m_strFilename);
+	if (file.is_open()) {
+		file.clear();
+		file.close();
+	}
 }
 
 bool FileManager::IsPartitionExist(char part_char) {
@@ -27,21 +36,18 @@ bool FileManager::IsPartitionExist(char part_char) {
 	return ret;
 }
 
-void FileManager::TryRead() {
-	std::ifstream file(__GenerateRandomFilename());
-	if (file.is_open()) file.close();
+bool FileManager::TryWrite() {
+	std::ofstream file(m_strFilename);
+	if (!file.is_open()) {
+		return false;
+	}
+	file << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()) << std::endl;
+	file.close();
+	return true;
 }
 
-std::string FileManager::__GenerateRandomFilename() {
-	std::default_random_engine e;
-	std::uniform_int_distribution<int> d(65, 65 + 25);//范围是A-Z 65->Z
-
-	std::string filename = ":/HDD_Awaker_";
-	filename.insert(filename.begin(), m_chPartition);
-	for (int i=0; i != 16; i++) {
-		filename.push_back((char)d(e));
-	}
-	filename.append(".fakefile");
-
-	return filename;
+void FileManager::__GenerateFilename() {
+	m_strFilename = ":/HDD_Awaker";
+	m_strFilename.insert(m_strFilename.begin(), m_chPartition);
+	m_strFilename.append(".cache");
 }
