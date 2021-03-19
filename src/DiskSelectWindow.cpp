@@ -18,8 +18,14 @@ DiskSelectWindow::DiskSelectWindow() {
 			}
 		}
 	}
-	//处理合法的选择，将盘符集合保存到public变量中
-	__ListSelectedDisk();
+	if (m_pButtonStart->changed()) {
+		//处理合法的选择，将盘符集合保存到public变量中
+		__ListSelectedDisk();
+	}
+	else {
+		//如果是直接关闭窗口，则为不合法的输入
+		strSelectedDisk.clear();
+	}
 }
 
 DiskSelectWindow::~DiskSelectWindow() {
