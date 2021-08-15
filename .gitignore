@@ -1,47 +1,6 @@
-# Prerequisites
-*.d
+# vscode directories
+build/
+.vscode/
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Visual Studio
-*.vcxproj.user
-*.vcxproj.filters
-*.vcxproj
-*.sln
-Debug/
-Release/
-.vs/
-
-# Document
-doc/
-
-# Third Part Libraries Directories
-lib/
+# testing file
+HDD_Awaker_LastSelected.txt
